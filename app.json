@@ -1,0 +1,27 @@
+{
+  "expo": {
+    "name": "ProductRegister",
+    "slug": "ProductRegister",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "",
+      "resizeMode": "",
+      "backgroundColor": ""
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "",
+        "backgroundColor": ""
+      }
+    },
+    "web": {
+      "favicon": ""
+    }
+  }
+}
