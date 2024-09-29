@@ -1,8 +1,8 @@
 import { View, Modal as RM, Text, StyleSheet } from "react-native";
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { theme } from "../../theme";
 import Button from "../Button";
-import RegisterModalInputs from "./registerModalInputs";
+import RegisterModalInputs from "./RegisterModalInputs";
 import { mutation } from "../../../mutations";
 
 const Modal = (props) => {
@@ -13,12 +13,16 @@ const Modal = (props) => {
   const { buttons, setModal, type } = props;
 
   let inputs = [];
-  
-  const handleModalSave = () => {
-    let status;
-    console.log(" > ", data, type);
-    status = mutation(type, data);
-    if (status.key) setStatusMessage(status.value);
+  let modalButtons = [];
+
+  const handleModalSave = async () => {
+    try {
+      const status = await mutation(type, data);
+      setStatusMessage(status.value);
+    } catch (error) {
+      console.error(error);
+      setStatusMessage("Error occurred");
+    }
   };
 
   const handleModalCancel = () => {
@@ -54,7 +58,7 @@ const Modal = (props) => {
         default:
           return;
       }
-      buttons[index] = (
+      modalButtons[index] = (
         <Button key={index} icon={icon} style={style} onPress={onPress} />
       );
     });
@@ -71,10 +75,12 @@ const Modal = (props) => {
         <View style={styles.modal}>
           {inputs}
           {statusMessage ? (
-            <View style={styles.statusMessage}>{statusMessage}</View>
+            <View style={styles.statusMessage}>
+              <Text>{statusMessage}</Text>
+            </View>
           ) : null}
         </View>
-        <View style={styles.buttonGroup}>{buttons}</View>
+        <View style={styles.buttonGroup}>{modalButtons}</View>
       </View>
     </RM>
   );
