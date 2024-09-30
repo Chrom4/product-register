@@ -2,7 +2,7 @@ import { View, Modal as RM, Text, StyleSheet } from "react-native";
 import { useState, useCallback } from "react";
 import { theme } from "../../theme";
 import Button from "../Button";
-import RegisterModalInputs from "./RegisterModalInputs";
+import RegisterModalInputs from "./RegisterModalInputs"
 import { mutation } from "../../../mutations";
 
 const Modal = (props) => {

@@ -6,13 +6,14 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { theme } from "../../theme";
+import React from "react";
 
 const NavBar = (props) => {
   const { options, onScreenChange } = props;
 
   const handleOptionPress = (option) => {
-    onScreenChange(option)
-  }
+    onScreenChange(option);
+  };
 
   return (
     <View style={styles.container}>
@@ -25,13 +26,17 @@ const NavBar = (props) => {
       >
         {options
           ? options.map((o, index) => (
-              <>
-                <TouchableOpacity key={index} style={styles.option} onPress={() => handleOptionPress(o.key)}>
+              <React.Fragment key={index}>
+                <TouchableOpacity
+                  style={styles.option}
+                  onPress={() => handleOptionPress(o.key)}
+                >
                   <Text style={styles.optionText}>{o.value}</Text>
                 </TouchableOpacity>
-                {(index !== options.length - 1) ?
-                <View style={styles.separatorLine} /> : null}
-              </>
+                {index !== options.length - 1 ? (
+                  <View style={styles.separatorLine} />
+                ) : null}
+              </React.Fragment>
             ))
           : null}
       </ScrollView>
