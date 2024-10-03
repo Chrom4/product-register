@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: theme.colors.white.base,
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: "800",
     paddingHorizontal: 8,
     paddingVertical: 12,

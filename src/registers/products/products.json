@@ -6,5 +6,29 @@
   {
     "name": "Blusa",
     "code": "B01"
+  },
+  {
+    "code": "123"
+  },
+  {
+    "code": "A"
+  },
+  {
+    "code": "B"
+  },
+  {
+    "code": "F"
+  },
+  {
+    "code": "1",
+    "name": "Tablet"
+  },
+  {
+    "code": "2",
+    "name": "Tablet"
+  },
+  {
+    "name": "Telefone",
+    "code": "1234"
   }
 ]

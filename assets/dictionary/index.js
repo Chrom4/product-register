@@ -9,5 +9,9 @@ export const dictionary = {
                 title: "Selecione uma ação"
             }
         }
+    },
+    inputs: {
+        name: "nome",
+        code: "código"
     }
 }

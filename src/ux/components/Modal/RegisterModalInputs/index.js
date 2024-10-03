@@ -17,7 +17,7 @@ const RegisterModalInputs = (props) => {
       </View>
 
       <View style={styles.input}>
-        <Text style={styles.title}>Código:</Text>
+        <Text style={styles.title}>Código:<Text style={styles.important}>*</Text></Text>
         <TextInput
           style={styles.textInput}
           onChangeText={(value) => onDataChange("code", value)}
@@ -39,11 +39,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: theme.colors.white.d2,
     paddingHorizontal: 8,
+    fontSize: 20
   },
   title: {
-    fontSize: 12,
+    fontSize: 18,
     fontWeight: "600",
   },
+  important: {
+    color: theme.colors.red.base
+  }
 });
 
 export default RegisterModalInputs;

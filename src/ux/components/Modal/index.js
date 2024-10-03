@@ -2,12 +2,12 @@ import { View, Modal as RM, Text, StyleSheet } from "react-native";
 import { useState, useCallback } from "react";
 import { theme } from "../../theme";
 import Button from "../Button";
-import RegisterModalInputs from "./RegisterModalInputs"
+import RegisterModalInputs from "./RegisterModalInputs";
 import { mutation } from "../../../mutations";
 
 const Modal = (props) => {
   const [visible, setVisible] = useState(!!props);
-  const [statusMessage, setStatusMessage] = useState();
+  const [statusMessage, setStatusMessage] = useState("");
   const [data, setData] = useState({});
 
   const { buttons, setModal, type } = props;
@@ -31,6 +31,7 @@ const Modal = (props) => {
   };
 
   const handleDataChange = (key, value) => {
+    if (statusMessage) setStatusMessage("");
     let clone = JSON.parse(JSON.stringify(data));
     clone[key] = value;
     setData(clone);

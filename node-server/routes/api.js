@@ -3,6 +3,7 @@ const router = express.Router();
 const bodyParser = require("body-parser");
 const fs = require("fs");
 const productsFile = `../src/registers/products/products.json`;
+const dict = require("../../assets/dictionary");
 
 router.use(bodyParser.json());
 
@@ -18,10 +19,32 @@ router.post("/add", (req, res) => {
   const data = req.body;
   console.log(data);
   for (let key of Object.keys(data)) {
-    let d = data[key]
+    let d = data[key];
     aux = 0;
     d.split(" ").forEach((a) => (a === "" ? (aux += 1) : null));
     if (aux === d.length) error = { error: "Campo Informado vazio" };
+  }
+
+  if (data && Object.keys(data).length !== 0) {
+    if (data.code) {
+    } else {
+      error = {
+        error: "Campo código é obrigatório",
+      };
+    }
+  } else {
+    error = {
+      error: "Nenhum campo foi preenchido",
+    };
+  }
+
+  for (let key of Object.keys(data)) {
+    const input = data[key];
+    if (input.trim().length === 0)
+      error = {
+        error: `O campo ${dict.dictionary.inputs[key]} não pode ser vazio`,
+      };
+    if (error) break;
   }
 
   if (!error) {
@@ -32,15 +55,13 @@ router.post("/add", (req, res) => {
       } else {
         fileContents = fileData.length ? JSON.parse(fileData.toString()) : [];
 
-        if (fileContents.find((f) => f.code === data.code))
+        if (fileContents.find((f) => f.code === data.code)) {
           error = { error: "Ja existe cadastro com o código informado" };
-
-        console.log("before >\n", fileContents);
-
-        fileContents.push(data);
-        fileContents = JSON.stringify(fileContents, null, 2);
+        }
 
         if (!error) {
+          fileContents.push(data);
+          fileContents = JSON.stringify(fileContents, null, 2);
           fs.writeFile(productsFile, fileContents, (err) => {
             if (err) {
               console.error(err);
@@ -50,6 +71,8 @@ router.post("/add", (req, res) => {
               res.json("Cadastro feito com Sucesso!");
             }
           });
+        } else {
+          res.json(`Ocorreu um erro no cadastro:\n${error.error}`);
         }
       }
     });

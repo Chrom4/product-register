@@ -1,20 +1,44 @@
 import { useState, useEffect } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 
 import { theme } from "../ux/theme";
 import Button from "../ux/components/Button";
 import Modal from "../ux/components/Modal";
+import products from "../registers/products/products.json";
+
+const Card = ({ name, code }) => {
+  return (
+    <View style={styles.card}>
+      <Text style={styles.title}>
+        Nome: <Text style={styles.text}>{name}</Text>
+      </Text>
+      <Text style={styles.title}>
+        Código: <Text style={styles.text}>{code}</Text>
+      </Text>
+    </View>
+  );
+};
 
 const Home = (props) => {
   const [modal, setModal] = useState();
 
   const handleRegisterForm = () => {
-    return setModal(<Modal buttons={["cancel", "save"]} setModal={setModal} type={"register"}/>);
+    return setModal(
+      <Modal
+        buttons={["cancel", "save"]}
+        setModal={setModal}
+        type={"register"}
+      />
+    );
   };
 
   return (
     <View style={styles.container}>
-      
+      <ScrollView contentContainerStyle={{ rowGap: 20 }} style={styles.list}>
+        {products.map((p, index) => {
+          return <Card name={p.name} code={p.code} />;
+        })}
+      </ScrollView>
       {!modal ? (
         <View style={styles.footer}>
           <Button
@@ -33,11 +57,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  list: {
+    gap: 20,
+    marginHorizontal: 10,
+    marginVertical: 10,
+    maxHeight: "70%",
+  },
   title: {
-    fontWeight: "500",
+    color: theme.colors.white.base,
+    fontWeight: "900",
+    fontSize: 30,
   },
   text: {
-    fontWeight: "300",
+    color: theme.colors.white.base,
+    fontWeight: "500",
+    fontSize: 25,
   },
   selectionMenu: {
     margin: 16,
@@ -66,6 +100,11 @@ const styles = StyleSheet.create({
     height: 70,
     alignItems: "center",
     justifyContent: "center",
+  },
+  card: {
+    borderRadius: 8,
+    padding: 10,
+    backgroundColor: theme.colors.primary.l5,
   },
 });
 

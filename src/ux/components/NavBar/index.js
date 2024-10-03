@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   },
   optionText: {
     color: theme.colors.white.base,
-    fontSize: 12,
+    fontSize: 20,
     fontWeight: "600",
   },
   option: {
