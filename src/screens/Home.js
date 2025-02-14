@@ -36,18 +36,16 @@ const Home = (props) => {
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ rowGap: 20 }} style={styles.list}>
         {products.map((p, index) => {
-          return <Card name={p.name} code={p.code} />;
+          return <Card key={"card" + index} name={p.name} code={p.code} />;
         })}
       </ScrollView>
-      {!modal ? (
-        <View style={styles.footer}>
-          <Button
-            style={styles.addButton}
-            icon={{ name: "plus", size: 30, color: theme.colors.white.base }}
-            onPress={handleRegisterForm}
-          />
-        </View>
-      ) : null}
+      <View style={styles.footer}>
+        <Button
+          style={styles.addButton}
+          icon={{ name: "plus", size: 30, color: theme.colors.white.base }}
+          onPress={handleRegisterForm}
+        />
+      </View>
       {modal}
     </View>
   );
@@ -61,7 +59,7 @@ const styles = StyleSheet.create({
     gap: 20,
     marginHorizontal: 10,
     marginVertical: 10,
-    maxHeight: "70%",
+    flex: 1,
   },
   title: {
     color: theme.colors.white.base,
@@ -86,9 +84,6 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   footer: {
-    width: "100%",
-    height: "100%",
-    position: "absolute",
     justifyContent: "flex-end",
     alignItems: "center",
     padding: 16,
