@@ -3,18 +3,28 @@ import bodyParser from "body-parser";
 import { dictionary as dict } from "../../assets/dictionary/index.js";
 import Mongo from "../helper/index.js";
 
-const mongo = new Mongo();
 const router = express.Router();
 
 router.use(bodyParser.json());
 
-router.get("/data", (req, res) => {
-  const data = req.body;
+router.get("/data", async (req, res) => {
+  try {
+    const data = req.body;
+    if (!data) throw new Error("No data given.")
+
+    const mongo = new Mongo();
+    
+    res.json(await mongo.mongoFind(data.collection, data.query));
+  } catch (error) {
+    console.error(error)
+    res.json([]);
+  }
 });
 
 router.post("/add", async (req, res) => {
   try {
     const data = req.body;
+    const mongo = new Mongo();
 
     for (let key of Object.keys(data)) {
       const input = data[key];
@@ -25,7 +35,7 @@ router.post("/add", async (req, res) => {
     }
 
     await mongo.mongoInsertOne("products", data);
-    
+    res.json("Cadastro feito com sucesso!");
   } catch (error) {
     res.json(`Ocorreu um erro no cadastro:\n${error}`);
   }

@@ -5,17 +5,15 @@ import { MongoClient } from "mongodb";
 const uri = "mongodb://localhost:27017/prodreg";
 const app = express();
 const client = new MongoClient(uri);
-let db;
+let db; 
 
 const connectDB = async () => {
   try {
     await client.connect();
-    db = client.db();
-
+    db = client.db(); 
     console.log("Connected to MongoDB");
   } catch (error) {
     console.error("MongoDB Connection Error:", error);
-
     throw error;
   }
 };
@@ -29,8 +27,5 @@ connectDB().then(() => {
 
 app.use("/api", apiRouter);
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
 
 export { db };

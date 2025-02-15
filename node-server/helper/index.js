@@ -5,11 +5,6 @@ class Mongo {
     this.db = db;
   }
 
-  async init() {
-    this.db = await connectDB();
-    return this;
-  }
-
   async mongoFind(collection) {
     return await this.db.collection(collection).find({}).toArray();
   }

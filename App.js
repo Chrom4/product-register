@@ -7,13 +7,17 @@ import ContentRender from "./src/ux/components/ContentRender";
 import { theme } from "./src/ux/theme";
 import screens from "./src/screens";
 
+import { protocol, address, port } from "./server_config.json";
+
 export default function App() {
   const [screen, setScreen] = useState("");
 
-  useEffect(() => {
+  useEffect( () => {
     if (!screen) {
       setScreen("Home");
     }
+
+    
   }, []);
 
   const handleScreenChange = (screen) => {

@@ -4,7 +4,6 @@ import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { theme } from "../ux/theme";
 import Button from "../ux/components/Button";
 import Modal from "../ux/components/Modal";
-import products from "../registers/products/products.json";
 
 const Card = ({ name, code }) => {
   return (
@@ -35,7 +34,7 @@ const Home = (props) => {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={{ rowGap: 20 }} style={styles.list}>
-        {products.map((p, index) => {
+        {[].map((p, index) => {
           return <Card key={"card" + index} name={p.name} code={p.code} />;
         })}
       </ScrollView>
