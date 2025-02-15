@@ -1,9 +1,16 @@
 import { useState, useEffect } from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  RefreshControl,
+} from "react-native";
 
-import { theme } from "../ux/theme";
-import Button from "../ux/components/Button";
-import Modal from "../ux/components/Modal";
+import { theme } from "../view/theme";
+import Button from "../view/components/Button";
+import Modal from "../view/components/Modal";
+import Spinner from "../view/components/Spinner";
 
 const Card = ({ name, code }) => {
   return (
@@ -19,6 +26,10 @@ const Card = ({ name, code }) => {
 };
 
 const Home = (props) => {
+  const { context, refresh } = props;
+  const { data, i18n } = context;
+  const { onRefresh, refreshing } = refresh;
+
   const [modal, setModal] = useState();
 
   const handleRegisterForm = () => {
@@ -33,11 +44,25 @@ const Home = (props) => {
 
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={{ rowGap: 20 }} style={styles.list}>
-        {[].map((p, index) => {
-          return <Card key={"card" + index} name={p.name} code={p.code} />;
-        })}
-      </ScrollView>
+      {data ? (
+        <ScrollView
+          contentContainerStyle={{ rowGap: 20 }}
+          style={styles.list}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+        >
+          {data.length ? (
+            data.map((p, index) => {
+              return <Card key={"card" + index} name={p.name} code={p.code} />;
+            })
+          ) : (
+            <Text>{i18n.list.productList.noProducts}</Text>
+          )}
+        </ScrollView>
+      ) : (
+        <Spinner key={"spinner"} />
+      )}
       <View style={styles.footer}>
         <Button
           style={styles.addButton}

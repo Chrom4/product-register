@@ -1,17 +1,17 @@
 import { View, Text, StyleSheet } from "react-native";
 import { theme } from "../../theme";
-import { dictionary as dict } from "../../../../assets/dictionary";
+import dict from "../../../../assets/dictionary";
 import NavBar from "../NavBar";
 
 const Layout = (props) => {
-  const { screenOptions, onScreenChange } = props;
+  const { screenOptions, onScreenChange, selected } = props;
 
   return (
     <View style={styles.container}>
       <View style={styles.menu}>
         <Text style={styles.text}>{dict.app.title}</Text>
       </View>
-      <NavBar options={screenOptions} onScreenChange={onScreenChange}/>
+      <NavBar options={screenOptions} selected={selected} onScreenChange={onScreenChange}/>
       <View style={styles.content}>{props.children}</View>
     </View>
   );

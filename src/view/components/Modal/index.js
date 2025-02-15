@@ -3,7 +3,7 @@ import { useState, useCallback } from "react";
 import { theme } from "../../theme";
 import Button from "../Button";
 import RegisterModalInputs from "./RegisterModalInputs";
-import { mutation } from "../../../mutations";
+import { action } from "../../../model/action";
 
 const Modal = (props) => {
   const [visible, setVisible] = useState(!!props);
@@ -17,11 +17,11 @@ const Modal = (props) => {
 
   const handleModalSave = async () => {
     try {
-      const status = await mutation(type, data);
-      setStatusMessage(status.value);
+      const ret = await action(type, data);
+      setStatusMessage(ret.message);
     } catch (error) {
       console.error(error);
-      setStatusMessage("Error occurred");
+      setStatusMessage("An error occurred");
     }
   };
 

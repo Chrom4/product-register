@@ -1,6 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
-import { dictionary as dict } from "../../assets/dictionary/index.js";
+import dict from "../../assets/dictionary/index.js";
 import Mongo from "../helper/index.js";
 
 const router = express.Router();
@@ -9,15 +9,15 @@ router.use(bodyParser.json());
 
 router.get("/data", async (req, res) => {
   try {
-    const data = req.body;
-    if (!data) throw new Error("No data given.")
+    const data = req.query;
+    if (!data) throw new Error("No data given.");
 
     const mongo = new Mongo();
-    
+
     res.json(await mongo.mongoFind(data.collection, data.query));
   } catch (error) {
-    console.error(error)
-    res.json([]);
+    console.error(error);
+    res.json({});
   }
 });
 

@@ -1,17 +1,24 @@
-export const dictionary = {
-    app: {
-        title: "Registrador de Produtos"
+const dictionary = {
+  app: {
+    title: "Registrador de Produtos",
+  },
+  screens: {
+    home: {
+      title: "Bem-vindo ao Registrador de produtos",
+      selectionMenu: {
+        title: "Selecione uma ação",
+      },
     },
-    screens: {
-        home: {
-            title: "Bem-vindo ao Registrador de produtos",
-            selectionMenu: {
-                title: "Selecione uma ação"
-            }
-        }
+  },
+  inputs: {
+    name: "nome",
+    code: "código",
+  },
+  list: {
+    productList: {
+      noProducts: "Nenhum produto cadastrado",
     },
-    inputs: {
-        name: "nome",
-        code: "código"
-    }
-}
+  },
+};
+
+export default dictionary;

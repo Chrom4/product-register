@@ -1,14 +1,15 @@
 import { View, Text, StyleSheet } from "react-native";
+import { useState } from "react";
 import Home from "../../../screens/Home";
 import Registers from "../../../screens/Registers";
 
 const ContentRender = (props) => {
-  const { onScreenChange, screen } = props;
+  const { onScreenChange, screen, context, refresh } = props;
 
   let currentScreen;
   switch (screen) {
     case "Home":
-      currentScreen = <Home />;
+      currentScreen = <Home context={context} refresh={refresh} />;
       break;
     case "Registers":
       currentScreen = <Registers />;
@@ -16,7 +17,7 @@ const ContentRender = (props) => {
     default:
       currentScreen = (
         <View style={styles.message}>
-          <Text>{"Tela não encontrada :("}</Text>
+          <Text>{"Tela não encontrada."}</Text>
         </View>
       );
       break;
