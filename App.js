@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
-import { View, NativeModules, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { useState, useEffect } from "react";
-
+import Constants from "expo-constants";
 import Layout from "./src/view/components/Layout";
 import ContentRender from "./src/view/components/ContentRender";
 import { theme } from "./src/view/theme";
@@ -18,7 +18,7 @@ export default function App() {
     i18n: i18n,
   });
 
-  const statusBarHeight = NativeModules.StatusBarManager.HEIGHT;
+  const statusBarHeight = Constants.statusBarHeight;
   let content = [];
 
   useEffect(() => {

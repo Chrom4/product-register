@@ -12,13 +12,15 @@
       "backgroundColor": ""
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.ProductRegister"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "",
         "backgroundColor": ""
-      }
+      },
+      "package": "com.anonymous.ProductRegister"
     },
     "web": {
       "favicon": ""
